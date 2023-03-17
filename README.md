@@ -1,2 +1,3 @@
 # GameSDL2---LTNC-BTL-
-Endless Runner Game 
+ghost eat fruit 
+
