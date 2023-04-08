@@ -99,3 +99,8 @@ SDL_Rect Character::charRect()
 {
     return player;
 }
+void Character::returnSpawn()
+{
+    player.x = (SCREEN_WIDTH - player.w)/2;
+    player.y = (SCREEN_HEIGHT - player.h)/2;
+}

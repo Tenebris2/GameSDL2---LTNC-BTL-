@@ -5,8 +5,8 @@ BulletObject::BulletObject()
 {
 	bullet.x = SCREEN_WIDTH + SCALE;
 	bullet.y = SCREEN_HEIGHT + SCALE;
-	bullet.w = SCALE;
-	bullet.h = SCALE;
+	bullet.w = 16;
+	bullet.h = 16;
 	left_m = false;
 	bulletDir.up = false;
 	bulletDir.down = false;

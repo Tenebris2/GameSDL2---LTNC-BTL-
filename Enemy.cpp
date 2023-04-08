@@ -32,13 +32,6 @@ void Enemy::enemyFollow(int SNAKE_SPEED, int x, int y)
         enemy.x -= SNAKE_SPEED ;
     }
 }
-void Enemy::Spawn()
-{
-    int x = rand() % (SCREEN_WIDTH) + SCREEN_WIDTH;
-    int y = rand() % (SCREEN_HEIGHT) + SCREEN_HEIGHT;
-    enemy.x = x;
-    enemy.y = y;
-}
 void Enemy::enemyRender(SDL_Renderer* renderer,SDL_Rect* clip)
 {
     render(enemy.x,enemy.y,renderer,clip);
@@ -111,7 +104,7 @@ SDL_Rect Enemy::enemyRect()
 {
     return enemy;
 }
-void Enemy::enemyDelete(int randLoc)
+void Enemy::enemySpawn(int randLoc)
 {
     int x = rand() % (SCREEN_WIDTH)+SCREEN_WIDTH;
     int y = rand() % (SCREEN_HEIGHT)+SCREEN_HEIGHT;
@@ -138,11 +131,13 @@ void Enemy::enemyDelete(int randLoc)
     }
     enemy.x = x;
     enemy.y = y;
-
-    health = ENEMY_HEALTH;
 }
-void Enemy::enemyHealthCheck(SDL_Rect a, SDL_Rect b, int randLoc)
+bool Enemy::enemyHealthCheck(SDL_Rect a, SDL_Rect b)
 {
     if (CheckCollision(a,b)) health--;
-    if (health == 0) enemyDelete(randLoc);
+    if (health == 0)
+    {
+        is_killed = true;
+    }
+    return is_killed;
 }

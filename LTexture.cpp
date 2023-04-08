@@ -37,11 +37,13 @@ void LTexture::free()
         mHeight = 0;
     }
 }
-void LTexture::loadFont(std::string path, TTF_Font* gFont, SDL_Renderer* renderer, std::string text, int textX, int textY)
+void LTexture::loadFont(std::string path, TTF_Font* gFont, SDL_Renderer* renderer,
+                         std::string text, int x, int y)
 {
     free();
 
-    SDL_Color textColor = { 255 , 255  , 255 };
+    SDL_Rect textRect = {x , y, TEXT_WIDTH, TEXT_HEIGHT};
+    SDL_Color textColor = { 255 , 0  , 0 };
 
     if (gFont == nullptr)
     {
@@ -56,6 +58,9 @@ void LTexture::loadFont(std::string path, TTF_Font* gFont, SDL_Renderer* rendere
 
     SDL_FreeSurface(surfaceText);
 
+    SDL_RenderCopy(renderer, mTexture, NULL, &textRect);
+
+    close();
 }
 
 void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip)
@@ -69,4 +74,8 @@ void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip)
     }
     SDL_RenderCopy(gRenderer, mTexture, NULL, &renderSpace);
 }
-
+void LTexture::close()
+{
+    SDL_DestroyTexture(mTexture);
+    mTexture = NULL;
+}

@@ -1,29 +1,36 @@
-
 #include "CommonFunc.h"
 #include "LTexture.h"
 #include "Enemy.h"
 #include "BulletObject.h"
 #include "Character.h"
+#include "FoodObject.h"
+
+//Font
 TTF_Font* gFont = NULL;
+
+//Entities
 std::vector<Enemy> enemies;
-Character snake_test;
+Character player;
 BulletObject bullet;
+FoodObject food;
+
+
 SDL_Renderer* renderer = NULL;
 SDL_Window* window = NULL;
-LTexture background1;
-LTexture background2;
+
+//Texture
+LTexture background;
 LTexture gameOver;
-LTexture food;
-LTexture font;
-LTexture Mouse;
-SDL_Rect mouseRect{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - SCALE, 16 , 16 };
+LTexture font1;
+
+//Rect
 SDL_Rect fontRect = { 0,0,TEXT_WIDTH, TEXT_HEIGHT };
 SDL_Rect screenRect = { 0,0, SCREEN_WIDTH, SCREEN_HEIGHT };
-SDL_Rect snake = snake_test.charRect();
 SDL_Rect enemyRect = { 0,0,SCALE, SCALE };
 SDL_Rect fruit = { 0,0, SCALE, SCALE };
 bool running = true;
 int points = 0;
+
 void initSDL(void)
 {
     int rendererFlags, windowFlags;
@@ -71,25 +78,17 @@ void initSDL(void)
 }
 void loadMedia()
 {
-    background1.loadTexture("img/Nebula Red.png", renderer);
-    background2.loadTexture("img/Stars Small_1.png", renderer);
+    background.loadTexture("img/Stars Small_1.png", renderer);
     gameOver.loadTexture("img/gameover.png", renderer);
-    food.loadTexture("img/cherry_20.png", renderer);
-    //font.loadFont("font/minecraft.ttf", gFont, renderer, (std::string("POINTS: ") + std::to_string(points)).c_str(), 10, 10);
-    snake_test.charLoadTexture("img/ghost_20.png", renderer);
-    Mouse.loadTexture("cursor/Crosshair04.png", renderer);
-    bullet.bulletLoadTexture("img/bullet.png", renderer);
-}
-void mouseUpdate()
-{
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-
-    mouseRect.x = x;
-    mouseRect.y = y;
+    food.foodLoadTexture("img/cherry_20.png", renderer);
+    player.charLoadTexture("img/ghost_20.png", renderer);
+    bullet.bulletLoadTexture("img/bullet_red.png", renderer);
 }
 void close()
 {
+    background.close();
+    food.close();
+    gameOver.close();
     SDL_DestroyRenderer(renderer);
     renderer = NULL;
 
@@ -100,100 +99,50 @@ void close()
     TTF_Quit();
     TTF_CloseFont(gFont);
 }
-void prepareScene(void)
-{
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
-}
-void presentScene(void)
-{
-    SDL_RenderPresent(renderer);
-}
-void renderFood(int x, int y)
-{
-    food.render(x, y, renderer,&fruit);
-}
-std::pair<int, int> addFood()
-{
-    int x = 0;
-    int y = 0;
-    x = rand() % cols * SCALE;
-    y = rand() % rows * SCALE;
-    std::pair<int, int> foodLoc;
-    foodLoc = std::make_pair(x, y);
-    return foodLoc;
-}
-bool advancedCollisionDetection(SDL_Rect a,SDL_Rect b)
-{
-    //The sides of the rectangles
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
 
-    //Calculate the sides of rect A
-    leftA = a.x;
-    rightA = a.x + a.w;
-    topA = a.y;
-    bottomA = a.y + a.h;
-
-    //Calculate the sides of rect B
-    leftB = b.x;
-    rightB = b.x + b.w;
-    topB = b.y;
-    bottomB = b.y + b.h;
-
-    //If any of the sides from A are outside of B
-    if (bottomA <= topB)
+void enemySpawn()
+{
+    for (int i = 0; i < ENEMY_AMOUNT; i++)
     {
-        return false;
+        Enemy p_enemy;
+        int randLoc = rand() % 4;
+        p_enemy.enemySpawn(randLoc);
+        enemies.push_back(p_enemy);
     }
-
-    if (topA >= bottomB)
+   for (auto& p_enemy : enemies)
     {
-        return false;
+        p_enemy.enemyLoadTexture("img/ghost_21.png", renderer);
     }
-
-    if (rightA <= leftB)
-    {
-        return false;
-    }
-
-    if (leftA >= rightB)
-    {
-        return false;
-    }
-
-    //If none of the sides from A are outside B
-    return true;
 }
 int main(int argc, char* argv[])
 {
     initSDL();
     SDL_Event event;
+
     SDL_ShowCursor(false);
     gFont = TTF_OpenFont("font/minecraft.ttf", TEXT_RESOLUTION);
-    int foodRand = rand() % 3;
-    std::pair<int, int> foodLoc = addFood();
-    fruit.x = foodLoc.first;
-    fruit.y = foodLoc.second;
-    int deaths = 0;
+
     bool game_over = false;
     bool play_again = true;
+    bool spawn = false;
+
     loadMedia();
-        for (int i = 0; i < ENEMY_AMOUNT; i++) {
-            Enemy p_enemy;
-            p_enemy.Spawn();
-            enemies.push_back(p_enemy);
-        }
-        for (auto& p_enemy : enemies)
-        {
-            p_enemy.enemyLoadTexture("img/ghost_21.png", renderer);
-        }
+
+    enemySpawn();
+
+    food.addFood();
+
     while (play_again)
     {
-        prepareScene();
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+
+        SDL_RenderClear(renderer);
+
         SDL_Delay(5);
+        if (enemies.size() == 0)
+        {
+            enemySpawn();
+        }
         while (SDL_PollEvent(&event) != 0)
         {
             if (event.type == SDL_QUIT)
@@ -207,63 +156,75 @@ int main(int argc, char* argv[])
                     game_over = false;
                 }
             }
-            snake_test.DoInput(event);
-            bullet.Fire(event, snake_test.charPosX(),snake_test.charPosY());
+            player.DoInput(event);
+            bullet.Fire(event, player.charPosX(),player.charPosY());
         }
+
         bullet.bulletMove();
 
-        snake_test.DoPlayer(SPEED);
+        player.DoPlayer(SPEED);
 
-        background1.render(0, 0, renderer, &screenRect);
+        background.render(0, 0, renderer, &screenRect);
 
-        background2.render(0, 0, renderer, &screenRect);
-
-        mouseUpdate();
+        font1.loadFont("font/minecraft.ttf", gFont ,renderer,
+                      (std::string("POINTS: ") + std::to_string(points)).c_str(), 10 , 10);
 
         for (auto& p_enemy : enemies)
         {
-          p_enemy.enemyFollow(ENEMY_SPEED, snake_test.charPosX(), snake_test.charPosY());
+          p_enemy.enemyFollow(ENEMY_SPEED, player.charPosX(), player.charPosY());
         }
 
         bullet.bulletRender(renderer);
 
-        snake_test.charRender(renderer, &snake);
+        SDL_Rect playerRect = player.charRect();
+
+        player.charRender(renderer, &playerRect);
+
         for (auto& p_enemy : enemies)
         {
             p_enemy.enemyRender(renderer, &enemyRect);
         }
 
-        Mouse.render(mouseRect.x, mouseRect.y,renderer,&mouseRect);
+        SDL_Rect foodRect = food.foodRect();
 
-        if (advancedCollisionDetection(fruit, snake_test.charRect()))
+        if (food.foodCheckCollision(foodRect,playerRect))
         {
-            foodLoc = addFood();
-            fruit.x = foodLoc.first;
-            fruit.y = foodLoc.second;
+            food.addFood();
             points += 10;
         }
-        renderFood(fruit.x, fruit.y);
-        for (auto& p_enemy : enemies)
+
+        food.foodRender(renderer,&foodRect);
+
+        for (int i = 0; i < enemies.size(); )
         {
-            if (p_enemy.CheckCollision(p_enemy.enemyRect(), snake_test.charRect()))
+            if (enemies.at(i).CheckCollision(enemies.at(i).enemyRect(), player.charRect()))
             {
                 gameOver.render(0, 0, renderer, &screenRect);
                 game_over = true;
             }
-            if (p_enemy.CheckCollision(p_enemy.enemyRect(), bullet.bulletRect()))
+            if (enemies.at(i).enemyHealthCheck(enemies.at(i).enemyRect(), bullet.bulletRect()))
             {
-                int randLoc = rand() % 4;
-                p_enemy.enemyHealthCheck(p_enemy.enemyRect(), bullet.bulletRect(), randLoc);
+                enemies.erase(enemies.begin() + i);
+                continue;
             }
-            bullet.bulletCheckCollision(p_enemy.enemyRect(), bullet.bulletRect());
+            bullet.bulletCheckCollision(enemies.at(i).enemyRect(), bullet.bulletRect());
+            i++;
         }
         if (game_over == true)
         {
             SDL_RenderClear(renderer);
-            enemies.clear();
+            for (auto& p_enemy : enemies)
+            {
+                int randLoc = rand() % 4;
+                p_enemy.enemySpawn(randLoc);
+            }
+            points = 0;
+
+            player.returnSpawn();
+
             gameOver.render(0, 0, renderer, &screenRect);
         }
-        presentScene();
+        SDL_RenderPresent(renderer);
     }
     close();
     return 0;

@@ -17,6 +17,7 @@ public:
 	int charPosX();
 	int charPosY();
 	SDL_Rect charRect();
+	void returnSpawn();
 private:
 	input input_type;
 	SDL_Rect player;

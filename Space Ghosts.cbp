@@ -49,6 +49,8 @@
 		<Unit filename="CommonFunc.h" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.h" />
+		<Unit filename="FoodObject.cpp" />
+		<Unit filename="FoodObject.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
 		<Unit filename="main.cpp" />

@@ -19,11 +19,12 @@ public:
 	SDL_Rect enemyRect();
 	void Spawn();
 	bool CheckCollision(SDL_Rect a, SDL_Rect b);
-	void enemyDelete(int randLoc);
-	void enemyHealthCheck(SDL_Rect a, SDL_Rect b, int randLoc);
+	void enemySpawn(int randLoc);
+	bool enemyHealthCheck(SDL_Rect a, SDL_Rect b);
 private:
 	SDL_Rect enemy;
 	int health;
+	bool is_killed;
 };
 
 

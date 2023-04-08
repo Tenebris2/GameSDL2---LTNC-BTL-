@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1680775970 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
+1680777580 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
 	"BulletObject.h"
 
 1680775970 c:\c++ files and projects\space ghosts\bulletobject.h
 	"LTexture.h"
 	"Character.h"
 
-1680775970 c:\c++ files and projects\space ghosts\ltexture.h
+1680779179 c:\c++ files and projects\space ghosts\ltexture.h
 	"CommonFunc.h"
 
-1680776116 c:\c++ files and projects\space ghosts\commonfunc.h
+1680859509 c:\c++ files and projects\space ghosts\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -423,27 +423,37 @@
 	"begin_code.h"
 	"close_code.h"
 
-1680775970 c:\c++ files and projects\space ghosts\character.h
+1680797158 c:\c++ files and projects\space ghosts\character.h
 	"CommonFunc.h"
 	"LTexture.h"
 
-1680775970 source:c:\c++ files and projects\space ghosts\character.cpp
+1680797158 source:c:\c++ files and projects\space ghosts\character.cpp
 	"Character.h"
 
-1680775970 source:c:\c++ files and projects\space ghosts\enemy.cpp
+1680859238 source:c:\c++ files and projects\space ghosts\enemy.cpp
 	"Enemy.h"
 
-1680775970 c:\c++ files and projects\space ghosts\enemy.h
+1680858974 c:\c++ files and projects\space ghosts\enemy.h
 	"CommonFunc.h"
 	"LTexture.h"
 
-1680775970 source:c:\c++ files and projects\space ghosts\ltexture.cpp
+1680795629 source:c:\c++ files and projects\space ghosts\ltexture.cpp
 	"LTexture.h"
 
-1680775970 source:c:\c++ files and projects\space ghosts\main.cpp
+1680955277 source:c:\c++ files and projects\space ghosts\main.cpp
 	"CommonFunc.h"
 	"LTexture.h"
 	"Enemy.h"
 	"BulletObject.h"
 	"Character.h"
+	"FoodObject.h"
+
+1680954717 source:c:\c++ files and projects\space ghosts\foodobject.cpp
+	"FoodObject.h"
+
+1680871336 source:c:\c++ files and projects\space ghosts\mainfunc.cpp
+
+1680954717 c:\c++ files and projects\space ghosts\foodobject.h
+	"CommonFunc.h"
+	"LTexture.h"
 
