@@ -9,7 +9,7 @@
 1680779179 c:\c++ files and projects\space ghosts\ltexture.h
 	"CommonFunc.h"
 
-1680859509 c:\c++ files and projects\space ghosts\commonfunc.h
+1680956051 c:\c++ files and projects\space ghosts\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<stdio.h>
@@ -440,7 +440,7 @@
 1680795629 source:c:\c++ files and projects\space ghosts\ltexture.cpp
 	"LTexture.h"
 
-1680955277 source:c:\c++ files and projects\space ghosts\main.cpp
+1680956005 source:c:\c++ files and projects\space ghosts\main.cpp
 	"CommonFunc.h"
 	"LTexture.h"
 	"Enemy.h"

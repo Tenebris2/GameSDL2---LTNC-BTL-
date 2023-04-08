@@ -32,8 +32,8 @@ const int rows = SCREEN_HEIGHT / SCALE;
 const int SPEED = 2;
 const int BULLET_SPEED = 10;
 const int ENEMY_SPEED = 1;
-const int ENEMY_AMOUNT = 15;
-const int ENEMY_HEALTH = 8;
+const int ENEMY_AMOUNT = 25;
+const int ENEMY_HEALTH = 10;
 
 typedef struct input
 {

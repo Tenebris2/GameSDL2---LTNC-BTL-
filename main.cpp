@@ -24,12 +24,14 @@ LTexture gameOver;
 LTexture font1;
 
 //Rect
-SDL_Rect fontRect = { 0,0,TEXT_WIDTH, TEXT_HEIGHT };
-SDL_Rect screenRect = { 0,0, SCREEN_WIDTH, SCREEN_HEIGHT };
-SDL_Rect enemyRect = { 0,0,SCALE, SCALE };
-SDL_Rect fruit = { 0,0, SCALE, SCALE };
+SDL_Rect fontRect = { 0, 0 , TEXT_WIDTH, TEXT_HEIGHT };
+SDL_Rect screenRect = { 0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT };
+SDL_Rect enemyRect = { 0 , 0 , SCALE , SCALE };
+
 bool running = true;
 int points = 0;
+bool game_over = false;
+bool spawn = false;
 
 void initSDL(void)
 {
@@ -122,23 +124,21 @@ int main(int argc, char* argv[])
     SDL_ShowCursor(false);
     gFont = TTF_OpenFont("font/minecraft.ttf", TEXT_RESOLUTION);
 
-    bool game_over = false;
-    bool play_again = true;
-    bool spawn = false;
-
     loadMedia();
-
-    enemySpawn();
 
     food.addFood();
 
-    while (play_again)
+    while (running)
     {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
         SDL_RenderClear(renderer);
 
         SDL_Delay(5);
+
+        SDL_Rect foodRect = food.foodRect();
+        SDL_Rect playerRect = player.charRect();
+
         if (enemies.size() == 0)
         {
             enemySpawn();
@@ -176,16 +176,12 @@ int main(int argc, char* argv[])
 
         bullet.bulletRender(renderer);
 
-        SDL_Rect playerRect = player.charRect();
-
         player.charRender(renderer, &playerRect);
 
         for (auto& p_enemy : enemies)
         {
             p_enemy.enemyRender(renderer, &enemyRect);
         }
-
-        SDL_Rect foodRect = food.foodRect();
 
         if (food.foodCheckCollision(foodRect,playerRect))
         {
