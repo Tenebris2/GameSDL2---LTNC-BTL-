@@ -6,5 +6,5 @@
 1. SDL.h
 2. SDL_image.h
 3. SDL_ttf.h
-4. vector ...
+4. và nhiều thư viện khác sẵn trong C++
 		
