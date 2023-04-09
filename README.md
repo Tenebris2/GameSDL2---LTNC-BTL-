@@ -1,5 +1,10 @@
-# GameSDL2---LTNC-BTL-
-ma ăn cherry để tăng điểm mỗi quả +10đ
-tránh bị chạm bởi ma xanh
-bắn ma xanh bằng w-a-s-d mỗi nút tượng trung cho một hướng 
-
+# Space Ghosts
+# Mô tả lối chơi:
+- Thu thập hoa quả để tăng số điểm, mỗi quả tương ứng với 10đ.
+- Kẻ địch là những con ma xanh đuổi theo bạn, để chống đỡ lại sử dụng tổ hợp phím W,A,S,D tương ứng theo UP,LEFT,DOWN,RIGHT.
+# Thư Viện Chủ Yếu :
+1. SDL.h
+2. SDL_image.h
+3. SDL_ttf.h
+4. vector ...
+		
