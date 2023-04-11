@@ -33,14 +33,17 @@
 			<Add directory="../../SDL2-2.26.3/x86_64-w64-mingw32/include/SDL2" />
 			<Add directory="../../SDL2_ttf-2.20.2/x86_64-w64-mingw32/include/SDL2" />
 			<Add directory="../../SDL2_image-devel-2.6.3-mingw/SDL2_image-2.6.3/x86_64-w64-mingw32/include/SDL2" />
+			<Add directory="../../SDL2_mixer-2.6.3/x86_64-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add option="-lSDL2_image" />
 			<Add option="-lSDL2_ttf" />
+			<Add option="-lSDL2_mixer" />
 			<Add directory="../../SDL2-2.26.3/x86_64-w64-mingw32/lib" />
 			<Add directory="../../SDL2_ttf-2.20.2/x86_64-w64-mingw32/lib" />
 			<Add directory="../../SDL2_image-devel-2.6.3-mingw/SDL2_image-2.6.3/x86_64-w64-mingw32/lib" />
+			<Add directory="../../SDL2_mixer-2.6.3/x86_64-w64-mingw32/bin" />
 		</Linker>
 		<Unit filename="BulletObject.cpp" />
 		<Unit filename="BulletObject.h" />

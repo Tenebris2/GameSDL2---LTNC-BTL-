@@ -7,6 +7,8 @@
 
 //Font
 TTF_Font* gFont = NULL;
+//The music that will be played
+Mix_Music *music = NULL;
 
 //Entities
 std::vector<Enemy> enemies;
@@ -22,6 +24,7 @@ SDL_Window* window = NULL;
 LTexture background;
 LTexture gameOver;
 LTexture font1;
+LTexture font2;
 
 //Rect
 SDL_Rect fontRect = { 0, 0 , TEXT_WIDTH, TEXT_HEIGHT };
@@ -71,20 +74,39 @@ void initSDL(void)
     {
         std::cout << "SDL2_ttf system ready to go!" << std::endl;
     }
+    //Initialize SDL
+    if( SDL_Init(SDL_INIT_AUDIO ) < 0 )
+    {
+        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+    }
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
     //Initialize PNG loading
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags))
     {
         printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
     }
+
 }
 void loadMedia()
 {
+    //Load Textures
     background.loadTexture("img/Stars Small_1.png", renderer);
     gameOver.loadTexture("img/gameover.png", renderer);
     food.foodLoadTexture("img/cherry_20.png", renderer);
     player.charLoadTexture("img/ghost_20.png", renderer);
     bullet.bulletLoadTexture("img/bullet_red.png", renderer);
+
+    //Load music
+    music = Mix_LoadMUS( "sounds/MixueLovesYou.wav" );
+    if( music == NULL )
+    {
+        printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
 }
 void close()
 {
@@ -96,9 +118,17 @@ void close()
 
     SDL_DestroyWindow(window);
     window = NULL;
+
+    Mix_FreeMusic(music);
+    music = NULL;
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+
     SDL_Quit();
     IMG_Quit();
     TTF_Quit();
+
     TTF_CloseFont(gFont);
 }
 
@@ -116,8 +146,22 @@ void enemySpawn()
         p_enemy.enemyLoadTexture("img/ghost_21.png", renderer);
     }
 }
+void g_over()
+{
+   SDL_RenderClear(renderer);
+   for (auto& p_enemy : enemies)
+    {
+       int randLoc = rand() % 4;
+          p_enemy.enemySpawn(randLoc);
+    }
+    points = 0;
+    player.returnSpawn();
+    food.addFood();
+    gameOver.render(0, 0, renderer, &screenRect);
+}
 int main(int argc, char* argv[])
 {
+    srand(time(0));
     initSDL();
     SDL_Event event;
 
@@ -151,10 +195,41 @@ int main(int argc, char* argv[])
             }
             if (event.type == SDL_KEYDOWN)
             {
-                if (event.key.keysym.sym == SDLK_TAB)
+                switch(event.key.keysym.sym)
                 {
+                    case SDLK_TAB:
                     game_over = false;
-                }
+                    break;
+                    case SDLK_1:
+                    //If there is no music playing
+					if( Mix_PlayingMusic() == 0 )
+                    {
+						//Play the music
+						Mix_PlayMusic( music, -1 );
+					}
+					//If music is being played
+					else
+					{
+					//If the music is paused
+                        if( Mix_PausedMusic() == 1 )
+                        {
+                            //Resume the music
+                            Mix_ResumeMusic();
+                        }
+                        //If the music is playing
+                        else
+                        {
+                        //Pause the music
+                        Mix_PauseMusic();
+                        }
+                    }
+                    break;
+
+                    case SDLK_0:
+                    //Stop the music
+                    Mix_HaltMusic();
+                    break;
+				}
             }
             player.DoInput(event);
             bullet.Fire(event, player.charPosX(),player.charPosY());
@@ -201,6 +276,7 @@ int main(int argc, char* argv[])
             if (enemies.at(i).enemyHealthCheck(enemies.at(i).enemyRect(), bullet.bulletRect()))
             {
                 enemies.erase(enemies.begin() + i);
+                points++;
                 continue;
             }
             bullet.bulletCheckCollision(enemies.at(i).enemyRect(), bullet.bulletRect());
@@ -208,17 +284,7 @@ int main(int argc, char* argv[])
         }
         if (game_over == true)
         {
-            SDL_RenderClear(renderer);
-            for (auto& p_enemy : enemies)
-            {
-                int randLoc = rand() % 4;
-                p_enemy.enemySpawn(randLoc);
-            }
-            points = 0;
-
-            player.returnSpawn();
-
-            gameOver.render(0, 0, renderer, &screenRect);
+            g_over();
         }
         SDL_RenderPresent(renderer);
     }

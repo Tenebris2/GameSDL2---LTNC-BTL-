@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1680777580 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
+1681129502 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
 	"BulletObject.h"
 
 1680775970 c:\c++ files and projects\space ghosts\bulletobject.h
@@ -9,19 +9,12 @@
 1680779179 c:\c++ files and projects\space ghosts\ltexture.h
 	"CommonFunc.h"
 
-1680956051 c:\c++ files and projects\space ghosts\commonfunc.h
+1681190229 c:\c++ files and projects\space ghosts\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
-	<stdio.h>
-	<string>
-	<cstdlib>
-	<iostream>
-	<vector>
-	<algorithm>
-	<deque>
-	<ctime>
-	<utility>
+	<bits/stdc++.h>
 	<SDL_ttf.h>
+	<SDL_mixer.h>
 
 1677059418 c:\sdl2-2.26.3\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -440,7 +433,7 @@
 1680795629 source:c:\c++ files and projects\space ghosts\ltexture.cpp
 	"LTexture.h"
 
-1680956005 source:c:\c++ files and projects\space ghosts\main.cpp
+1681190255 source:c:\c++ files and projects\space ghosts\main.cpp
 	"CommonFunc.h"
 	"LTexture.h"
 	"Enemy.h"
@@ -456,4 +449,13 @@
 1680954717 c:\c++ files and projects\space ghosts\foodobject.h
 	"CommonFunc.h"
 	"LTexture.h"
+
+1681189192 c:\sdl2_mixer-2.6.3\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
 
