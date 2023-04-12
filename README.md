@@ -8,6 +8,20 @@
 1. SDL.h
 2. SDL_image.h
 3. SDL_ttf.h
-4. bits/stdc++.h 
+4. SDL_mixer.h
+5. bits/stdc++.h 
+# Cách cài các thư viện SDL2
+- Qua hướng dẫn trên trang web của lazyfoo theo đường dẫn : https://lazyfoo.net/tutorials/SDL/index.php.
+# Các tính năng của game (hiện tại):
+1. Music cho trò chơi. 
+2. Đạn bắn ( còn giới hạn )
+3. Điểm theo quả ăn được và lính giết được.
+4. Chức năng chơi lại.
+# Các tính năng của game (theo dự tính thời gian):
+1. Scrolling.
+2. Animation.
+3. Đạn bắn (dùng vector).
+4. Âm thanh khi bắn và chết.
+5. Menu cho game.
 # Tác Gia:
 Bùi Đức Anh
