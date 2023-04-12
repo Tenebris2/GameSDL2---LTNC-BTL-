@@ -22,6 +22,7 @@ SDL_Window* window = NULL;
 
 //Texture
 LTexture background;
+LTexture start;
 LTexture gameOver;
 LTexture font1;
 LTexture font2;
@@ -35,7 +36,7 @@ bool running = true;
 int points = 0;
 bool game_over = false;
 bool spawn = false;
-
+bool paused = true;
 void initSDL(void)
 {
     int rendererFlags, windowFlags;
@@ -95,14 +96,15 @@ void initSDL(void)
 void loadMedia()
 {
     //Load Textures
-    background.loadTexture("img/Stars Small_1.png", renderer);
+    background.loadTexture("img/Space Background.png", renderer);
     gameOver.loadTexture("img/gameover.png", renderer);
     food.foodLoadTexture("img/cherry_20.png", renderer);
     player.charLoadTexture("img/ghost_20.png", renderer);
     bullet.bulletLoadTexture("img/bullet_red.png", renderer);
+    start.loadTexture("img/START.png", renderer);
 
     //Load music
-    music = Mix_LoadMUS( "sounds/MixueLovesYou.wav" );
+    music = Mix_LoadMUS( "sounds/TetrisTheme.wav" );
     if( music == NULL )
     {
         printf( "Failed to load beat music! SDL_mixer Error: %s\n", Mix_GetError() );
@@ -171,7 +173,7 @@ int main(int argc, char* argv[])
     loadMedia();
 
     food.addFood();
-
+    Mix_PlayMusic(music, -1);
     while (running)
     {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -182,6 +184,7 @@ int main(int argc, char* argv[])
 
         SDL_Rect foodRect = food.foodRect();
         SDL_Rect playerRect = player.charRect();
+
 
         if (enemies.size() == 0)
         {
@@ -201,17 +204,8 @@ int main(int argc, char* argv[])
                     game_over = false;
                     break;
                     case SDLK_1:
-                    //If there is no music playing
-					if( Mix_PlayingMusic() == 0 )
-                    {
-						//Play the music
-						Mix_PlayMusic( music, -1 );
-					}
-					//If music is being played
-					else
-					{
 					//If the music is paused
-                        if( Mix_PausedMusic() == 1 )
+                        if( Mix_PausedMusic() == 1)
                         {
                             //Resume the music
                             Mix_ResumeMusic();
@@ -222,20 +216,29 @@ int main(int argc, char* argv[])
                         //Pause the music
                         Mix_PauseMusic();
                         }
-                    }
                     break;
-
-                    case SDLK_0:
-                    //Stop the music
-                    Mix_HaltMusic();
-                    break;
+                    case SDLK_SPACE:
+                    paused = false;
 				}
             }
-            player.DoInput(event);
-
-            bullet.Fire(event, player.charPosX(),player.charPosY());
+            if (!paused)
+            {
+                player.DoInput(event);
+                bullet.Fire(event, player.charPosX(),player.charPosY());
+            }
         }
+        //Music
 
+        if (game_over == true)
+        {
+            Mix_HaltMusic();
+        }
+		if( Mix_PlayingMusic() == 0 )
+		{
+            Mix_PlayMusic( music, -1 );
+		}
+
+		//moving objects
         bullet.bulletMove();
 
         player.DoPlayer(SPEED);
@@ -244,12 +247,13 @@ int main(int argc, char* argv[])
 
         font1.loadFont("font/minecraft.ttf", gFont ,renderer,
                       (std::string("POINTS: ") + std::to_string(points)).c_str(), 10 , 10);
-
-        for (auto& p_enemy : enemies)
+        if (!paused)
         {
-          p_enemy.enemyFollow(ENEMY_SPEED, player.charPosX(), player.charPosY());
+            for (auto& p_enemy : enemies)
+            {
+            p_enemy.enemyFollow(ENEMY_SPEED, player.charPosX(), player.charPosY());
+            }
         }
-
         bullet.bulletRender(renderer);
 
         player.charRender(renderer, &playerRect);
@@ -285,10 +289,8 @@ int main(int argc, char* argv[])
 
         bullet.bulletReload();
 
-        if (game_over == true)
-        {
-            g_over();
-        }
+        if (game_over == true) {g_over();}
+        if (paused) {start.render(0,0,renderer,&screenRect);}
         SDL_RenderPresent(renderer);
     }
     close();
