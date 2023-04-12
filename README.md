@@ -23,5 +23,11 @@
 3. Đạn bắn (dùng vector).
 4. Âm thanh khi bắn và chết.
 5. Menu cho game.
+# Code tham khỏa qua :
+1. Lazyfoo
+2. Gamedev
+3. Stackoverflow
+4. phattrienphanmem123az
+5. parallelrealities 
 # Tác Gia:
 Bùi Đức Anh
