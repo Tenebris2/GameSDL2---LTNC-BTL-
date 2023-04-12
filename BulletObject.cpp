@@ -97,10 +97,16 @@ void BulletObject::bulletLoadTexture(std::string path, SDL_Renderer* renderer)
 {
 	loadTexture(path.c_str(), renderer);
 }
+void BulletObject::bulletReload()
+{
+    health = 0;
+}
 SDL_Rect BulletObject::bulletRect()
 {
     return bullet;
 }
+// leave for now
+/*
 void BulletObject::bulletCheckCollision(SDL_Rect a, SDL_Rect b)
 {
     //The sides of the rectangles
@@ -124,22 +130,24 @@ void BulletObject::bulletCheckCollision(SDL_Rect a, SDL_Rect b)
     //If any of the sides from A are outside of B
     if (bottomA <= topB)
     {
-        health = 0;
+      //  health = 0;
     }
 
     if (topA >= bottomB)
     {
-        health = 0;
+     //  health = 0;
     }
 
     if (rightA <= leftB)
     {
-        health = 0;
+       // health = 0;
     }
 
     if (leftA >= rightB)
     {
-        health = 0;
+       // health = 0;
     }
+    health = 0;
     //If none of the sides from A are outside B
 }
+*/

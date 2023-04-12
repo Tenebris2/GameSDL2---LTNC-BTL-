@@ -232,6 +232,7 @@ int main(int argc, char* argv[])
 				}
             }
             player.DoInput(event);
+
             bullet.Fire(event, player.charPosX(),player.charPosY());
         }
 
@@ -279,9 +280,11 @@ int main(int argc, char* argv[])
                 points++;
                 continue;
             }
-            bullet.bulletCheckCollision(enemies.at(i).enemyRect(), bullet.bulletRect());
             i++;
         }
+
+        bullet.bulletReload();
+
         if (game_over == true)
         {
             g_over();

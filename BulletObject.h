@@ -13,6 +13,7 @@ public:
 	void Fire(SDL_Event event, int x, int y);
 	void bulletLoadTexture(std::string path, SDL_Renderer* renderer);
 	SDL_Rect bulletRect();
+	void bulletReload();
 	void bulletCheckCollision(SDL_Rect a, SDL_Rect b);
 private:
 	SDL_Rect bullet;

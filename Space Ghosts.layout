@@ -2,54 +2,39 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="BulletObject.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="452" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Character.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="313" topLine="64" />
+		</Cursor>
+	</File>
+	<File name="LTexture.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="575" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6314" topLine="228" />
+		</Cursor>
+	</File>
 	<File name="Enemy.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="578" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="LTexture.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="489" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="BulletObject.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="529" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="FoodObject.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="669" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="Enemy.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2765" topLine="110" />
-		</Cursor>
-	</File>
-	<File name="Character.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="3" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="313" topLine="73" />
-		</Cursor>
-	</File>
-	<File name="LTexture.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="954" topLine="13" />
-		</Cursor>
-	</File>
-	<File name="FoodObject.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="333" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3837" topLine="145" />
+			<Cursor1 position="174" topLine="18" />
 		</Cursor>
 	</File>
 	<File name="CommonFunc.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="186" topLine="0" />
+			<Cursor1 position="263" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Character.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
@@ -57,9 +42,24 @@
 			<Cursor1 position="401" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="FoodObject.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="333" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="BulletObject.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2774" topLine="74" />
+			<Cursor1 position="2415" topLine="79" />
+		</Cursor>
+	</File>
+	<File name="LTexture.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1887" topLine="41" />
+		</Cursor>
+	</File>
+	<File name="FoodObject.cpp" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="571" topLine="21" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
