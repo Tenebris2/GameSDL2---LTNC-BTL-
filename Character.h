@@ -8,7 +8,8 @@ class Character : public LTexture
 public:
 	Character();
 	~Character();
-	void charRender(SDL_Renderer* renderer, SDL_Rect* clip);
+	void charRender(SDL_Renderer* renderer, SDL_Rect* clip,
+                 double angle, SDL_Point* center, SDL_RendererFlip flip);
 	void charLoadTexture(std::string path, SDL_Renderer* renderer);
 	void DoInput(SDL_Event event);
 	void DoPlayer(int SNAKE_SPEED);

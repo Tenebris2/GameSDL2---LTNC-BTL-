@@ -11,9 +11,10 @@ FoodObject::~FoodObject()
 {
 
 }
-void FoodObject::foodRender(SDL_Renderer* renderer, SDL_Rect* clip)
+void FoodObject::foodRender(SDL_Renderer* renderer, SDL_Rect* clip,
+                             double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    render(food.x,food.y,renderer,clip);
+    render(food.x,food.y,renderer,clip, angle, center, flip);
 }
 void FoodObject::foodLoadTexture(std::string path,SDL_Renderer* renderer)
 {

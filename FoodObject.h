@@ -8,7 +8,8 @@ class FoodObject : public LTexture
 public:
     FoodObject();
     ~FoodObject();
-    void foodRender(SDL_Renderer* renderer, SDL_Rect* clip);
+    void foodRender(SDL_Renderer* renderer, SDL_Rect* clip,
+                    double angle, SDL_Point* center, SDL_RendererFlip flip);
     void foodLoadTexture(std::string path, SDL_Renderer* renderer);
     void addFood();
     bool foodCheckCollision(SDL_Rect a, SDL_Rect b);

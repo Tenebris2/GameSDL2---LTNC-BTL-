@@ -32,17 +32,30 @@ void Enemy::enemyFollow(int SNAKE_SPEED, int x, int y)
         enemy.x -= SNAKE_SPEED ;
     }
 }
-void Enemy::enemyRender(SDL_Renderer* renderer,SDL_Rect* clip)
+void Enemy::enemyRender(SDL_Renderer* renderer,SDL_Rect* clip,int frame,
+                        double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    render(enemy.x,enemy.y,renderer,clip);
+    //Render current frame
+    SDL_Rect* currentClip = &gSpriteClips[frame/ENEMY_ANIMATION_FRAMES];
+
+    render(enemy.x,enemy.y,renderer,currentClip,angle,center,flip);
 }
-void Enemy::enemyLoadTexture(std::string path, SDL_Renderer* renderer)
+void Enemy::enemyLoadTexture(SDL_Renderer* renderer)
 {
-    loadTexture(path.c_str(), renderer);
+    loadTexture("img/enemy-sprite.png",renderer);
+
+    //Set sprite clips
+    for (int i = 0; i < ENEMY_ANIMATION_FRAMES; i++)
+    {
+        gSpriteClips[i].x = SCALE*2*i;
+        gSpriteClips[i].y = 0;
+        gSpriteClips[i].w = SCALE*2;
+        gSpriteClips[i].h = SCALE*2;
+    }
 }
 bool Enemy::CheckCollision(SDL_Rect a, SDL_Rect b)
 {
-    //The sides of the rectangles
+        //The sides of the rectangles
     int leftA, leftB;
     int rightA, rightB;
     int topA, topB;
@@ -80,9 +93,8 @@ bool Enemy::CheckCollision(SDL_Rect a, SDL_Rect b)
     {
         return false;
     }
-
-    //If none of the sides from A are outside B
     return true;
+    //If none of the sides from A are outside B
 }
 int Enemy::enemyWidth()
 {

@@ -13,7 +13,8 @@ public:
     void loadTexture(std::string path, SDL_Renderer* renderer);
     void free();
     void loadFont(std::string textureText, TTF_Font* gFont, SDL_Renderer* renderer, std::string text, int x, int y);
-    void render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip);
+    void render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip,
+                 double angle, SDL_Point* center, SDL_RendererFlip flip);
     void cameraRender(std::string path, SDL_Renderer* renderer, SDL_Rect cameraRect);
     void close();
 private:

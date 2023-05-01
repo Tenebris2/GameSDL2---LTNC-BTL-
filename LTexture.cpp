@@ -43,7 +43,7 @@ void LTexture::loadFont(std::string path, TTF_Font* gFont, SDL_Renderer* rendere
     free();
 
     SDL_Rect textRect = {x , y, TEXT_WIDTH, TEXT_HEIGHT};
-    SDL_Color textColor = { 255 , 0  , 0 };
+    SDL_Color textColor = { 255 , 255  , 255};
 
     if (gFont == nullptr)
     {
@@ -63,7 +63,8 @@ void LTexture::loadFont(std::string path, TTF_Font* gFont, SDL_Renderer* rendere
     close();
 }
 
-void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip)
+void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip
+                      , double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
     SDL_Rect renderSpace = { x, y, mWidth, mHeight };
 
@@ -72,7 +73,8 @@ void LTexture::render(int x, int y, SDL_Renderer* gRenderer, SDL_Rect* clip)
         renderSpace.w = clip->w;
         renderSpace.h = clip->h;
     }
-    SDL_RenderCopy(gRenderer, mTexture, NULL, &renderSpace);
+	//Render to screen
+	SDL_RenderCopyEx(gRenderer, mTexture, clip, &renderSpace, angle, center, flip);
 }
 void LTexture::close()
 {

@@ -46,15 +46,15 @@ void Character::DoInput(SDL_Event event)
                 }
             }
 }
-void Character::charRender(SDL_Renderer* renderer,SDL_Rect* clip)
+void Character::charRender(SDL_Renderer* renderer,SDL_Rect* clip,
+                           double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    render(player.x, player.y, renderer,clip);
+    render(player.x, player.y, renderer,clip, angle, center, flip);
 }
 void Character::charLoadTexture(std::string path, SDL_Renderer* renderer)
 {
     loadTexture(path.c_str(), renderer);
 }
-
 void Character::DoPlayer(int SNAKE_SPEED)
 {
     if (input_type.up == 1)

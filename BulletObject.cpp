@@ -20,9 +20,35 @@ BulletObject::~BulletObject()
 
 }
 
-void BulletObject::bulletRender(SDL_Renderer* renderer)
+void BulletObject::bulletRender(SDL_Renderer* renderer, SDL_Rect* clip,int startTime,
+                                 double angle, SDL_Point* center)
 {
-	render(bullet.x, bullet.y, renderer, &bullet);
+    SDL_RendererFlip flip;
+    if (bulletDir.right == 1)
+    {
+        flip = SDL_FLIP_NONE;
+        angle = 0;
+    }
+    else if (bulletDir.left == 1)
+    {
+        flip = SDL_FLIP_HORIZONTAL;
+        angle = 0;
+    }
+    else if(bulletDir.down == 1)
+    {
+        flip = SDL_FLIP_VERTICAL;
+        angle = 90;
+    }
+    else if(bulletDir.up == 1)
+    {
+        flip = SDL_FLIP_VERTICAL;
+        angle = -90;
+    }
+    int frameToDraw = ((SDL_GetTicks() - startTime) * BULLET_ANIMATION_FRAMES / ANIMATION_TIME) % BULLET_ANIMATION_FRAMES;
+    //Render current frame
+    SDL_Rect* currentClip = &gSpriteClips[frameToDraw];
+
+	render(bullet.x, bullet.y, renderer, currentClip,angle, center, flip);
 }
 void BulletObject::Fire(SDL_Event event, int x, int y)
 {
@@ -34,8 +60,8 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 0;
             bulletDir.left = 0;
             bulletDir.right = 0;
-            bullet.x = x;
-            bullet.y = y;
+            bullet.x = x - SCALE/2;
+            bullet.y = y - SCALE/2;
             health = 1;
         }
         else if (event.key.keysym.sym == SDLK_w and health == 0)
@@ -44,8 +70,8 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 1;
             bulletDir.left = 0;
             bulletDir.right = 0;
-            bullet.x = x;
-            bullet.y = y;
+            bullet.x = x - SCALE/2;
+            bullet.y = y - SCALE/2;
             health = 1;
         }
         else if (event.key.keysym.sym == SDLK_a and health == 0)
@@ -54,8 +80,8 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 0;
             bulletDir.left = 1;
             bulletDir.right = 0;
-            bullet.x = x;
-            bullet.y = y;
+            bullet.x = x - SCALE/2;
+            bullet.y = y - SCALE/2;
             health = 1;
         }
         else if (event.key.keysym.sym == SDLK_d and health == 0)
@@ -65,7 +91,7 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.left = 0;
             bulletDir.right = 1;
             bullet.x = x;
-            bullet.y = y;
+            bullet.y = y - SCALE/2;
             health = 1;
         }
     }
@@ -93,9 +119,17 @@ void BulletObject::bulletMove()
     if (bullet.y < 0 || bullet.y > SCREEN_HEIGHT) health = 0;
    // if (bulletCheckCollision) health = 0;
 }
-void BulletObject::bulletLoadTexture(std::string path, SDL_Renderer* renderer)
+void BulletObject::bulletLoadTexture(SDL_Renderer* renderer)
 {
-	loadTexture(path.c_str(), renderer);
+	loadTexture("img/HolyVFX.png", renderer);
+    //Set sprite clips
+    for (int i = 0; i < BULLET_ANIMATION_FRAMES; i++)
+    {
+        gSpriteClips[i].x = BULLET_SCALE*i;
+        gSpriteClips[i].y = 0;
+        gSpriteClips[i].w = BULLET_SCALE;
+        gSpriteClips[i].h = BULLET_SCALE;
+    }
 }
 void BulletObject::bulletReload()
 {
@@ -105,49 +139,3 @@ SDL_Rect BulletObject::bulletRect()
 {
     return bullet;
 }
-// leave for now
-/*
-void BulletObject::bulletCheckCollision(SDL_Rect a, SDL_Rect b)
-{
-    //The sides of the rectangles
-    int leftA, leftB;
-    int rightA, rightB;
-    int topA, topB;
-    int bottomA, bottomB;
-
-    //Calculate the sides of rect A
-    leftA = a.x;
-    rightA = a.x + a.w;
-    topA = a.y;
-    bottomA = a.y + a.h;
-
-    //Calculate the sides of rect B
-    leftB = b.x;
-    rightB = b.x + b.w;
-    topB = b.y;
-    bottomB = b.y + b.h;
-
-    //If any of the sides from A are outside of B
-    if (bottomA <= topB)
-    {
-      //  health = 0;
-    }
-
-    if (topA >= bottomB)
-    {
-     //  health = 0;
-    }
-
-    if (rightA <= leftB)
-    {
-       // health = 0;
-    }
-
-    if (leftA >= rightB)
-    {
-       // health = 0;
-    }
-    health = 0;
-    //If none of the sides from A are outside B
-}
-*/

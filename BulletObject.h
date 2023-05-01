@@ -8,15 +8,17 @@ class BulletObject : public LTexture
 public:
 	BulletObject();
 	~BulletObject();
-	void bulletRender(SDL_Renderer* renderer);
+	void bulletRender(SDL_Renderer* renderer, SDL_Rect* clip,int startTime,
+ double angle, SDL_Point* center);
 	void bulletMove();
 	void Fire(SDL_Event event, int x, int y);
-	void bulletLoadTexture(std::string path, SDL_Renderer* renderer);
+	void bulletLoadTexture(SDL_Renderer* renderer);
 	SDL_Rect bulletRect();
 	void bulletReload();
 	void bulletCheckCollision(SDL_Rect a, SDL_Rect b);
 private:
 	SDL_Rect bullet;
+    SDL_Rect gSpriteClips[ENEMY_ANIMATION_FRAMES];
 	bool left_m;
 	input bulletDir;
 	int health;
