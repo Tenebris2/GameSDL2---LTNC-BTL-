@@ -7,7 +7,7 @@ BulletObject::BulletObject()
 	bullet.y = SCREEN_HEIGHT + SCALE;
 	bullet.w = 16;
 	bullet.h = 16;
-	left_m = false;
+	left_m = 0;
 	bulletDir.up = false;
 	bulletDir.down = false;
 	bulletDir.left = false;
@@ -60,7 +60,7 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 0;
             bulletDir.left = 0;
             bulletDir.right = 0;
-            bullet.x = x - SCALE/2;
+            bullet.x = x;
             bullet.y = y - SCALE/2;
             health = 1;
         }
@@ -70,7 +70,7 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 1;
             bulletDir.left = 0;
             bulletDir.right = 0;
-            bullet.x = x - SCALE/2;
+            bullet.x = x;
             bullet.y = y - SCALE/2;
             health = 1;
         }
@@ -81,7 +81,7 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.left = 1;
             bulletDir.right = 0;
             bullet.x = x - SCALE/2;
-            bullet.y = y - SCALE/2;
+            bullet.y = y;
             health = 1;
         }
         else if (event.key.keysym.sym == SDLK_d and health == 0)
@@ -90,8 +90,8 @@ void BulletObject::Fire(SDL_Event event, int x, int y)
             bulletDir.up = 0;
             bulletDir.left = 0;
             bulletDir.right = 1;
-            bullet.x = x;
-            bullet.y = y - SCALE/2;
+            bullet.x = x - SCALE/2;
+            bullet.y = y;
             health = 1;
         }
     }
@@ -139,3 +139,5 @@ SDL_Rect BulletObject::bulletRect()
 {
     return bullet;
 }
+bool BulletObject::getDir(){ return bulletDir.right;}
+;

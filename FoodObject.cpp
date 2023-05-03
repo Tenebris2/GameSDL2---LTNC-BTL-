@@ -11,14 +11,26 @@ FoodObject::~FoodObject()
 {
 
 }
-void FoodObject::foodRender(SDL_Renderer* renderer, SDL_Rect* clip,
+void FoodObject::foodRender(SDL_Renderer* renderer, SDL_Rect* clip,int frame,
                              double angle, SDL_Point* center, SDL_RendererFlip flip)
 {
-    render(food.x,food.y,renderer,clip, angle, center, flip);
+       //Render current frame
+    SDL_Rect* currentClip = &gSpriteClips[frame/ENEMY_ANIMATION_FRAMES];
+
+    render(food.x,food.y,renderer,currentClip,angle,center,flip);
 }
 void FoodObject::foodLoadTexture(std::string path,SDL_Renderer* renderer)
 {
     loadTexture(path.c_str(),renderer);
+
+    //Set sprite clips
+    for (int i = 0; i < FOOD_ANIMATION_FRAMES; i++)
+    {
+        gSpriteClips[i].x = 32*i;
+        gSpriteClips[i].y = 0;
+        gSpriteClips[i].w = 32;
+        gSpriteClips[i].h = 32;
+    }
 }
 void FoodObject::addFood()
 {

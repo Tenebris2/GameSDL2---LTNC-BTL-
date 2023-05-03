@@ -5,8 +5,8 @@ Enemy::Enemy()
 {
     enemy.x = 0;
     enemy.y = 0;
-    enemy.w = SCALE;
-    enemy.h = SCALE;
+    enemy.w = ENEMY_HIT_BOX;
+    enemy.h = ENEMY_HIT_BOX;
     health = ENEMY_HEALTH;
 }
 Enemy::~Enemy()

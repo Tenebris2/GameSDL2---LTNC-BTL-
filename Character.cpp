@@ -8,8 +8,8 @@ Character::Character()
     input_type.left = 0;
     player.x = SCREEN_WIDTH/2;
     player.y = SCREEN_HEIGHT/2;
-    player.w = SCALE;
-    player.h = SCALE;
+    player.w = PLAYER_HIT_BOX;
+    player.h = PLAYER_HIT_BOX;
 }
 Character::~Character(){}
 void Character::DoInput(SDL_Event event)
@@ -46,14 +46,27 @@ void Character::DoInput(SDL_Event event)
                 }
             }
 }
-void Character::charRender(SDL_Renderer* renderer,SDL_Rect* clip,
-                           double angle, SDL_Point* center, SDL_RendererFlip flip)
+void Character::charRender(SDL_Renderer* renderer,SDL_Rect* clip,int frame,
+                           double angle, SDL_Point* center, SDL_RendererFlip flip, bool bDir)
 {
-    render(player.x, player.y, renderer,clip, angle, center, flip);
+     //Render current frame
+    SDL_Rect* currentClip = &gSpriteClips[frame/PLAYER_ANIMATION_FRAMES];
+
+    if (input_type.right == 1 || bDir == true) render(player.x,player.y,renderer,currentClip,angle,center,SDL_FLIP_NONE);
+    else render(player.x,player.y,renderer,currentClip,angle,center,SDL_FLIP_HORIZONTAL);
 }
 void Character::charLoadTexture(std::string path, SDL_Renderer* renderer)
 {
-    loadTexture(path.c_str(), renderer);
+    loadTexture(path,renderer);
+
+    //Set sprite clips
+    for (int i = 0; i < PLAYER_ANIMATION_FRAMES; i++)
+    {
+        gSpriteClips[i].x = SCALE*2*i;
+        gSpriteClips[i].y = 0;
+        gSpriteClips[i].w = SCALE*2;
+        gSpriteClips[i].h = SCALE*2;
+    }
 }
 void Character::DoPlayer(int SNAKE_SPEED)
 {
@@ -75,9 +88,9 @@ void Character::DoPlayer(int SNAKE_SPEED)
     }
 
     if (player.x < 0) player.x += SNAKE_SPEED;
-    else if (player.x > SCREEN_WIDTH - SCALE) player.x -= SNAKE_SPEED;
+    else if (player.x > SCREEN_WIDTH - SCALE*2) player.x -= SNAKE_SPEED;
     else if (player.y < 0) player.y += SNAKE_SPEED;
-    else if (player.y > SCREEN_HEIGHT - SCALE) player.y -= SNAKE_SPEED;
+    else if (player.y > SCREEN_HEIGHT - SCALE*2) player.y -= SNAKE_SPEED;
 }
 int Character::charWidth()
 {

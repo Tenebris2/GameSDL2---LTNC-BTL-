@@ -22,6 +22,7 @@ public:
 	bool CheckCollision(SDL_Rect a, SDL_Rect b);
 	void enemySpawn(int randLoc);
 	bool enemyHealthCheck(SDL_Rect a, SDL_Rect b);
+	void enemyInit();
 private:
 	SDL_Rect enemy;
 	SDL_Rect gSpriteClips[ENEMY_ANIMATION_FRAMES];

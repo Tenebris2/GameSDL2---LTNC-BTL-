@@ -16,9 +16,10 @@ public:
 	SDL_Rect bulletRect();
 	void bulletReload();
 	void bulletCheckCollision(SDL_Rect a, SDL_Rect b);
+	bool getDir();
 private:
 	SDL_Rect bullet;
-    SDL_Rect gSpriteClips[ENEMY_ANIMATION_FRAMES];
+    SDL_Rect gSpriteClips[BULLET_ANIMATION_FRAMES];
 	bool left_m;
 	input bulletDir;
 	int health;

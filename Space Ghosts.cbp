@@ -57,6 +57,8 @@
 		<Unit filename="FoodObject.h" />
 		<Unit filename="LTexture.cpp" />
 		<Unit filename="LTexture.h" />
+		<Unit filename="LTimer.cpp" />
+		<Unit filename="LTimer.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

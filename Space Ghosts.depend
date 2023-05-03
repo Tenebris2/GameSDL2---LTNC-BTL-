@@ -1,21 +1,23 @@
 # depslib dependency file v1.0
-1682514685 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
+1682957864 source:c:\c++ files and projects\space ghosts\bulletobject.cpp
 	"BulletObject.h"
 
-1682514419 c:\c++ files and projects\space ghosts\bulletobject.h
+1683038319 c:\c++ files and projects\space ghosts\bulletobject.h
 	"LTexture.h"
 	"Character.h"
 
 1682431896 c:\c++ files and projects\space ghosts\ltexture.h
 	"CommonFunc.h"
 
-1682946723 c:\c++ files and projects\space ghosts\commonfunc.h
+1683090418 c:\c++ files and projects\space ghosts\commonfunc.h
 	<SDL.h>
 	<SDL_image.h>
 	<bits/stdc++.h>
 	<SDL_ttf.h>
 	<SDL_mixer.h>
 	<fstream>
+	<stdint.h>
+	<sys/types.h>
 
 1677059418 c:\sdl2-2.26.3\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -417,37 +419,38 @@
 	"begin_code.h"
 	"close_code.h"
 
-1682928332 c:\c++ files and projects\space ghosts\character.h
+1682957856 c:\c++ files and projects\space ghosts\character.h
 	"CommonFunc.h"
 	"LTexture.h"
 
-1682928332 source:c:\c++ files and projects\space ghosts\character.cpp
+1683089536 source:c:\c++ files and projects\space ghosts\character.cpp
 	"Character.h"
 
-1682946723 source:c:\c++ files and projects\space ghosts\enemy.cpp
+1683089536 source:c:\c++ files and projects\space ghosts\enemy.cpp
 	"Enemy.h"
 
-1682516764 c:\c++ files and projects\space ghosts\enemy.h
+1683039014 c:\c++ files and projects\space ghosts\enemy.h
 	"CommonFunc.h"
 	"LTexture.h"
 
 1682503290 source:c:\c++ files and projects\space ghosts\ltexture.cpp
 	"LTexture.h"
 
-1682946646 source:c:\c++ files and projects\space ghosts\main.cpp
+1683090994 source:c:\c++ files and projects\space ghosts\main.cpp
 	"CommonFunc.h"
 	"LTexture.h"
 	"Enemy.h"
 	"BulletObject.h"
 	"Character.h"
 	"FoodObject.h"
+	"LTimer.h"
 
-1682933691 source:c:\c++ files and projects\space ghosts\foodobject.cpp
+1683089918 source:c:\c++ files and projects\space ghosts\foodobject.cpp
 	"FoodObject.h"
 
 1680871336 source:c:\c++ files and projects\space ghosts\mainfunc.cpp
 
-1682932622 c:\c++ files and projects\space ghosts\foodobject.h
+1683089918 c:\c++ files and projects\space ghosts\foodobject.h
 	"CommonFunc.h"
 	"LTexture.h"
 
@@ -467,4 +470,17 @@
 
 1682946723 source:c:\c++ files and projects\space ghosts\commonfunc.cpp
 	"CommonFunc.h"
+
+1682953569 source:c:\c++ files and projects\space ghosts\ltimer.cpp
+	"LTimer.h"
+	"CommonFunc.h"
+
+1682953551 c:\c++ files and projects\space ghosts\ltimer.h
+
+1683037305 source:c:\c++ files and projects\space ghosts\menu.cpp
+	"Menu.h"
+
+1683037305 c:\c++ files and projects\space ghosts\menu.h
+	"CommonFunc.h"
+	"LTexture.h"
 
