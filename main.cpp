@@ -63,22 +63,22 @@ void initSDL();
 void initGame();
 void loadMedia();
 void close();
-void outFile();
+void HSFile();
 void handleInput();
 void handleEnemy(int frame);
 void handleCurrentEvent();
 void handleAnimation();
 void handleObj();
 void handleFPS();
-void speedMechanic();
 int main(int argc, char* argv[])
 {
     initGame();
+
     while (running)
     {
         handleFPS();
 
-        outFile();
+        HSFile();
 
         SDL_RenderClear(renderer);
 
@@ -94,6 +94,7 @@ int main(int argc, char* argv[])
         handleEnemy(frame);
         //Current events
         handleCurrentEvent();
+
         SDL_RenderPresent(renderer);
     }
     close();
@@ -107,7 +108,7 @@ void initSDL(void)
 
     windowFlags = 0;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0)
     {
         printf("Couldn't initialize SDL: %s\n", SDL_GetError());
         exit(1);
@@ -248,17 +249,8 @@ void initGame()
     Mix_PlayMusic(music, -1);
 
     fpsTimer.start();
-    std::ifstream readFile;
-    readFile.open("highscore/highscore.txt");
-    if (readFile.is_open())
-    {
-        while(!readFile.eof())
-        {
-            readFile>>highscore;
-        }
-    }
 }
-void outFile()
+void HSFile()
 {
     std::ofstream writeFile("highscore/highscore.txt");
     if (writeFile.is_open())

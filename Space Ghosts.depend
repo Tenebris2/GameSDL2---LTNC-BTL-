@@ -426,7 +426,7 @@
 1683089536 source:c:\c++ files and projects\space ghosts\character.cpp
 	"Character.h"
 
-1683089536 source:c:\c++ files and projects\space ghosts\enemy.cpp
+1683101350 source:c:\c++ files and projects\space ghosts\enemy.cpp
 	"Enemy.h"
 
 1683039014 c:\c++ files and projects\space ghosts\enemy.h
@@ -436,7 +436,7 @@
 1682503290 source:c:\c++ files and projects\space ghosts\ltexture.cpp
 	"LTexture.h"
 
-1683090994 source:c:\c++ files and projects\space ghosts\main.cpp
+1683430823 source:c:\c++ files and projects\space ghosts\main.cpp
 	"CommonFunc.h"
 	"LTexture.h"
 	"Enemy.h"
@@ -483,4 +483,16 @@
 1683037305 c:\c++ files and projects\space ghosts\menu.h
 	"CommonFunc.h"
 	"LTexture.h"
+
+1683378753 c:\c++ files and projects\space ghosts\gameutils.h
+	"LTexture.h"
+	"Enemy.h"
+	"BulletObject.h"
+	"Character.h"
+	"FoodObject.h"
+	"LTimer.h"
+	"CommonFunc.h"
+
+1683378772 source:c:\c++ files and projects\space ghosts\gameutils.cpp
+	"GameUtils.h"
 
